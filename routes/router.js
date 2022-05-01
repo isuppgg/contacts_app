@@ -1,15 +1,13 @@
 const { Router } = require('express');
 const router = Router();
-const { register, login } = require('../controllers/authControllers');
+const userRouter = require('../controllers/users');
+const login = require('../controllers/login');
 
 router.get('/', (req, res) => {
   res.status(200).send('<h1>Hello World</h1>').end();
 });
 
-router.post('/api/register', register);
-
-router.post('/api/login', login);
-
-router.use('/api/users/', require('./users'));
+router.use('/api/users', userRouter);
+router.use('/api/login', login);
 
 module.exports = router;
