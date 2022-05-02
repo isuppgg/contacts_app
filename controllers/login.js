@@ -1,8 +1,11 @@
 const con = require('../database/connection');
 const loginRouter = require('express').Router();
 const { comparePass } = require('../helpers/password');
+const jwt = require('jsonwebtoken');
 
-/* Login feature not completed yet */
+/* User log in wit username or email and password and returns a 
+   JWT token
+*/
 loginRouter.post('/', (req, res) => {
   const { usernameEmail, password } = req.body;
   con.query(
@@ -20,12 +23,19 @@ loginRouter.post('/', (req, res) => {
         res.status(401).json({ error: 'Incorrect user or password' }).end();
         return;
       }
+      const userForToken = {
+        id: rows[0].id,
+        username: rows[0].username,
+      };
+
+      const token = jwt.sign(userForToken, process.env.JWT_SECRET);
 
       res
         .status(200)
         .json({
           user: rows[0].username,
           email: rows[0].email,
+          token,
         })
         .end();
     }

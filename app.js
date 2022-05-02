@@ -1,8 +1,12 @@
 require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
+
 const morgan = require('morgan');
+
+const errorHandler = require('./middlewares/handleErros');
 
 const corsOptions = {
   origin: '*',
@@ -20,6 +24,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use(require('./routes/router'));
+app.use(errorHandler);
 
 // Starting the server
 app.listen(PORT, () => {
