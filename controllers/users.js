@@ -26,16 +26,16 @@ userRouter.post('/', async (req, res) => {
         if (err.errno === 1062) {
           res.status(406);
           res
-            .send(
-              `User with this ${
+            .json({
+              error: `User with this ${
                 err.sqlMessage.includes('user.email') ? 'email' : 'username'
-              } already exists`
-            )
+              } already exists`,
+            })
             .end();
         }
         return;
       }
-      res.status(201).end();
+      res.status(201).json({ message: 'User succesfully created' }).end();
     }
   );
 });

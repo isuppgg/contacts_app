@@ -4,8 +4,7 @@ const { comparePass } = require('../helpers/password');
 const jwt = require('jsonwebtoken');
 
 /* User log in wit username or email and password and returns a 
-   JWT token
-*/
+   JWT token */
 loginRouter.post('/', (req, res) => {
   const { usernameEmail, password } = req.body;
   con.query(

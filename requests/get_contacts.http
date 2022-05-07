@@ -1,0 +1,3 @@
+GET http://localhost:8080/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJvZ2ciLCJpYXQiOjE2NTE3NjU5ODd9.GidsYzwh7L2SRPj0Rddzyrv5Habpc93PJZyFNknvQBs 
+Content-Type: application/json

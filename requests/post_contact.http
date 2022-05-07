@@ -1,0 +1,18 @@
+POST http://localhost:8080/api/contacts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJpU3VwcCIsImlhdCI6MTY1MTUwNDk3M30._cB0taH1OPJ8XwdozPP80KROUd6InqcTuU93cZB_jrY
+ 
+{
+    "name": "Oswaldo 3",
+    "number": 9123234
+}
+
+### 
+POST http://localhost:8080/api/contacts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJPc3dhbGRvIGciLCJpYXQiOjE2NTE1MDYzMDB9.D40Ya8HkQny-PQYqWDe0xFm5tNlUNInyVc8zT19zwfc
+
+{
+    "name": "Claudio GG",
+    "number": 833183218
+}

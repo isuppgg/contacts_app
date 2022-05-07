@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 // Verify if user's token is valid and check put of what user
 // is requesting
 module.exports = (req, res, next) => {
-  const authorization = req.get('authorization');
+  const authorization = req.get('Authorization');
   let token = '';
+  console.log(authorization);
 
   if (authorization && authorization.toLowerCase().startsWith('bearer')) {
     token = authorization.substring(7);
@@ -14,6 +15,7 @@ module.exports = (req, res, next) => {
     decodedToken = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
     next(err);
+    return;
   }
 
   if (!token || !decodedToken.id) {

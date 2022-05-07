@@ -1,0 +1,9 @@
+PUT http://localhost:8080/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJvZ2ciLCJpYXQiOjE2NTE3ODE3ODV9.UUTlJWAeFtUGlYqeHMa48C71YoDVpob96C9KKTwWZAk
+Content-Type: application/json
+
+{
+  "name": "Oswaldo",
+  "number": "83318060106",
+  "id": "123245"
+}
