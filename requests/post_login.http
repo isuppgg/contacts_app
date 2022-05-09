@@ -23,3 +23,13 @@ Content-Type: application/json
     "usernameEmail": "oswaldo.gg@gmail.com",
     "password": "oswaldo"
 }
+
+
+### 
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+    "usernameEmail": "ogg",
+    "password": "oswaldo"
+}

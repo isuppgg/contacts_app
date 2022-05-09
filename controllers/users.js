@@ -14,7 +14,7 @@ userRouter.get('/', (req, res) => {
 /* Create a new user in our database if already exists 
  send an 406 error 'Not acceptable' */
 
-userRouter.post('/', async (req, res) => {
+userRouter.post('/', async (req, res, next) => {
   const { username, email, password } = req.body;
   const hashedPass = await hashPass(password);
 
@@ -24,14 +24,8 @@ userRouter.post('/', async (req, res) => {
     (err, rows, fields) => {
       if (err) {
         if (err.errno === 1062) {
-          res.status(406);
-          res
-            .json({
-              error: `User with this ${
-                err.sqlMessage.includes('user.email') ? 'email' : 'username'
-              } already exists`,
-            })
-            .end();
+          err.name = 'ER_DUP_ENTRY';
+          next(err);
         }
         return;
       }

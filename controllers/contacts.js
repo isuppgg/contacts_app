@@ -1,6 +1,5 @@
 const con = require('../database/connection');
 const contactsRouter = require('express').Router();
-const jwt = require('jsonwebtoken');
 
 // Returns all user's contacts
 contactsRouter.get('/', (req, res, next) => {

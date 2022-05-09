@@ -19,7 +19,13 @@ loginRouter.post('/', (req, res) => {
           : false;
 
       if (!passwordCorrect) {
-        res.status(401).json({ error: 'Incorrect user or password' }).end();
+        res
+          .status(401)
+          .json({
+            error: true,
+            message: 'Incorrect user or password',
+          })
+          .end();
         return;
       }
       const userForToken = {
@@ -28,7 +34,6 @@ loginRouter.post('/', (req, res) => {
       };
 
       const token = jwt.sign(userForToken, process.env.JWT_SECRET);
-
       res
         .status(200)
         .json({

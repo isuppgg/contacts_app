@@ -4,15 +4,15 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-const morgan = require('morgan');
+const routes = require('./routes/router');
+const errorHandler = require('./middlewares/handleErrors');
 
-const errorHandler = require('./middlewares/handleErros');
+const morgan = require('morgan');
 
 const corsOptions = {
   origin: '*',
   methods: 'GET, POST, PUT, DELETE',
   preflightContinue: false,
-  optionsSuccessStatus: 204,
 };
 
 const PORT = process.env.PORT || 8080;
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
-app.use(require('./routes/router'));
+app.use(routes);
 app.use(errorHandler);
 
 // Starting the server
