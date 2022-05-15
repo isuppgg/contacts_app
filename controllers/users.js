@@ -4,7 +4,6 @@ const { hashPass } = require('../helpers/password');
 
 // Get all users
 userRouter.get('/', (req, res) => {
-  console.log(req.body);
   con.query('SELECT username FROM user', (err, rows, fields) => {
     if (err) throw err;
     res.status(200).json(rows).end();

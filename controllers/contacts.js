@@ -4,7 +4,6 @@ const contactsRouter = require('express').Router();
 // Returns all user's contacts
 contactsRouter.get('/', (req, res, next) => {
   const userId = req.userId;
-  console.log({ userId });
   con.query(
     'SELECT id,name,number FROM contact WHERE created_by = ?',
     [userId],
@@ -46,7 +45,6 @@ contactsRouter.post('/', (req, res, next) => {
 // Update a contact
 contactsRouter.put('/', (req, res, next) => {
   const { name, number, id } = req.body;
-  console.log({ name, number, id });
   const userId = req.userId;
   con.query(
     'UPDATE contact SET ? WHERE id = ? AND created_by = ?',
@@ -73,7 +71,6 @@ contactsRouter.put('/', (req, res, next) => {
 contactsRouter.delete('/', (req, res) => {
   const { id } = req.body;
   const userId = req.userId;
-  console.log({ userId });
   con.query(
     'DELETE FROM contact WHERE id = ? AND created_by = ?',
     [id, userId],
