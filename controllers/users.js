@@ -22,11 +22,8 @@ userRouter.post('/', async (req, res, next) => {
     { username, email, password: hashedPass },
     (err, rows, fields) => {
       if (err) {
-        if (err.errno === 1062) {
-          err.name = 'ER_DUP_ENTRY';
-          next(err);
-        }
-        return;
+        err.name = err?.code;
+        return next(err);
       }
       res.status(201).json({ message: 'User succesfully created' }).end();
     }

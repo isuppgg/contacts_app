@@ -27,6 +27,9 @@ app.use(routes);
 app.use(errorHandler);
 
 // Starting the server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listen on port ${PORT}`);
 });
+
+// Export app to test
+module.exports = { app, server };

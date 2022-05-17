@@ -31,6 +31,19 @@ const ERROR_HANDLERS = {
       .end();
   },
 
+  ER_BAD_NULL_ERROR: (res, err) => {
+    console.log(err.sqlMessage);
+    res
+      .status(400)
+      .json({
+        error: true,
+        message: `Value ${
+          err.sqlMessage.includes('email') ? 'email' : 'username'
+        } cannot be null or undefined`, // Existing user
+      })
+      .end();
+  },
+
   defaultError: (res, error) => {
     res
       .status(500)
