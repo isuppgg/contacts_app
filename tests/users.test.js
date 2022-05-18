@@ -1,39 +1,20 @@
-const supertest = require('supertest');
 const connection = require('../database/connection');
-const { app, server } = require('../index');
+const { server } = require('../index');
+const { api, initialUsers } = require('./helpers');
+const { hashPass } = require('../helpers/password');
 
-const api = supertest(app);
-
-const initialUsers = [
-  {
-    username: 'root',
-    email: 'root@gmail.com',
-    password: 'root',
-  },
-  {
-    username: 'oswaldo',
-    email: 'user1@gmail.com',
-    password: 'user1',
-  },
-];
-
-beforeEach(() => {
+beforeEach(async () => {
   connection.query('DELETE FROM user');
   connection.query('DELETE FROM contact');
   for (user of initialUsers) {
+    const hashedPass = await hashPass(user.password);
+
     connection.query(`INSERT INTO user SET ?`, {
       username: user.username,
       email: user.email,
-      password: user.password,
+      password: hashedPass,
     });
   }
-});
-
-describe('GET /', () => {
-  test('should respond with a 200 status code', async () => {
-    const response = await api.get('/').send();
-    expect(response.headers['content-type']).toMatch(/text\/html/);
-  });
 });
 
 describe('GET /users', () => {
@@ -44,11 +25,11 @@ describe('GET /users', () => {
 
   test('should respond length of 2', async () => {
     const response = await api.get('/api/users');
-    expect(response.body.length).toBe(2);
+    expect(response.body).toHaveLength(2);
   });
 });
 
-describe('POST', () => {
+describe('POST /users', () => {
   describe('given all needed data', () => {
     test('Should respond with an 201 status code', async () => {
       const firstResponse = await api.post('/api/users').send({
@@ -59,7 +40,7 @@ describe('POST', () => {
       expect(firstResponse.statusCode).toBe(201);
 
       const secondResponse = await api.get('/api/users');
-      expect(secondResponse.body.length).toBe(initialUsers.length + 1);
+      expect(secondResponse.body).toHaveLength(initialUsers.length + 1);
     });
   });
 

@@ -7,6 +7,11 @@ const jwt = require('jsonwebtoken');
    JWT token */
 loginRouter.post('/', (req, res) => {
   const { usernameEmail, password } = req.body;
+  if (!usernameEmail || !password) {
+    return res
+      .status(400)
+      .json({ error: true, message: 'No field can be null' });
+  }
   con.query(
     'SELECT * FROM user WHERE username = ? OR email = ?',
     [usernameEmail, usernameEmail],

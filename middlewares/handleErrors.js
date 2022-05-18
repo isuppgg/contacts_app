@@ -32,7 +32,6 @@ const ERROR_HANDLERS = {
   },
 
   ER_BAD_NULL_ERROR: (res, err) => {
-    console.log(err.sqlMessage);
     res
       .status(400)
       .json({
