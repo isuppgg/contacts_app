@@ -3,7 +3,7 @@ const loginRouter = require('express').Router();
 const { comparePass } = require('../helpers/password');
 const jwt = require('jsonwebtoken');
 
-/* User log in wit username or email and password and returns a 
+/* User logs in with username or email and password and returns a 
    JWT token */
 loginRouter.post('/', (req, res) => {
   const { usernameEmail, password } = req.body;
@@ -39,6 +39,7 @@ loginRouter.post('/', (req, res) => {
       };
 
       const token = jwt.sign(userForToken, process.env.JWT_SECRET);
+
       res
         .status(200)
         .json({

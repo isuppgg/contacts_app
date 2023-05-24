@@ -3,9 +3,12 @@ const userRouter = require('express').Router();
 const { hashPass } = require('../helpers/password');
 
 // Get all users
-userRouter.get('/', (req, res) => {
+userRouter.get('/', (req, res, next) => {
   con.query('SELECT username FROM user', (err, rows, fields) => {
-    if (err) throw err;
+    if (err) {
+      err.name = err?.code;
+      return next(err);
+    }    
     res.status(200).json(rows).end();
   });
 });
