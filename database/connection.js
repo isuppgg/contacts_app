@@ -1,5 +1,5 @@
 require('dotenv').config()
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
 const mode = process.env.NODE_ENV === 'production'
 const options = {
